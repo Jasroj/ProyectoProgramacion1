@@ -902,5 +902,6 @@ public class Mundial extends javax.swing.JFrame {
     int basura;
     int basura2;
     int basura3;
+    int basura4;
 }
 }
