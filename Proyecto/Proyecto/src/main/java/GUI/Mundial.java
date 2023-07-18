@@ -658,8 +658,13 @@ public class Mundial extends javax.swing.JFrame {
         }
         this.getCAF().settablaCaf(seleciones);
         this.getCAF().jugarPartido();
+        List<Resultados> tablaPartido = this.getCAF().getTablaPartido();
+        if (!tablaPartido.isEmpty()) {
         Resultados res = this.getCAF().getTablaPartido().get(this.getCAF().getTablaPartido().size() - 1);
+        // Actualizar la interfaz gráfica con los resultados obtenidos.
         this.txtSimuladosCAF.setText(this.Imprimir(res));
+        this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
+    }
 //<<<<<<< HEAD
         this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
         
