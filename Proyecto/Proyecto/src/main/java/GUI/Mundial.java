@@ -28,6 +28,7 @@ public class Mundial extends javax.swing.JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
+        teamMatches = new HashMap<>();
     }
     private HashMap<String, Integer> teamMatches;
     private CAF CAF;
@@ -35,7 +36,7 @@ public class Mundial extends javax.swing.JFrame {
     private CONMEBOL CONMEBOL;
     private Concacaf Concacaf;
     private UEFA UEFA;
-
+    
     /**
      * @return the CAF
      */
@@ -816,7 +817,7 @@ public class Mundial extends javax.swing.JFrame {
                 // Simular y actualizar los resultados del partido
                 int team1 = Integer.parseInt(teams[0]);
                 int team2 = Integer.parseInt(teams[1]);
-                this.getCAF().simularYActualizarPartido(team1, team2); 
+                this.getCAF().simularYActualizarPartido(team1, team2);
             }
         }
     
