@@ -38,48 +38,6 @@ public class CAF {
         
         this.ActualizarResultado(equipo1, golE1, golE2);
         this.ActualizarResultado(equipo2, golE2, golE1);
-
-//te parece si comentas lo que intentaste para ver intentar la idea que llevaba ayer? es que ya se me hizo enredo :D jjjj si si sorry jejejeje
-       /* for (int i = 0; i > seleciones.size(); i++) {
-            if (equipo1.equals(seleciones.get(i).getSelecion())) {
-                seleciones.get(i).setGolesFavor(p.getPos());//pos son goles del equipo 1
-                seleciones.get(i).setGolesContra(p.getPuntos());//puntos son goles del equipo 2
-                if (p.getPos() == p.getPuntos()) {
-                    seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 1);
-                    seleciones.get(i).setPartidosJugados(seleciones.get(i).getPartidosJugados() + 1);
-                    seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 1);
-                }
-            } else if (p.getPos() > p.getPuntos()) {
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-
-            } else if (p.getPos() < p.getPuntos()) {
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-
-            } else if (equipo2.equals(seleciones.get(i).getSelecion())) {
-                //seleciones.get(i).setGolesFavor(p.golE1);
-                //seleciones.get(i).setGolesContra(p.golE2);
-                if (p.getPos() == p.getPuntos()) {
-                    seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 1);
-                    seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 1);
-                    seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 1);
-                    seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 1);
-                }
-            } else if (p.getPos() > p.getPuntos()) {
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-
-            } else if (p.getPos() < p.getPuntos()) {
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-                seleciones.get(i).setPuntos(seleciones.get(i).getPuntos() + 3);
-
-            }
-        }*/
     }
     
     public void ActualizarResultado(Selecion equipo, int golFavor, int golEncontra)
