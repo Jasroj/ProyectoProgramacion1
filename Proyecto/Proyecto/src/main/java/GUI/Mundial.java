@@ -850,7 +850,7 @@ public class Mundial extends javax.swing.JFrame {
             this.txtSimuladosCAF.setText(this.Imprimir(res));
             this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
         }
-    
+    }
 
     /**
      * @param args the command line arguments
