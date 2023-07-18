@@ -29,7 +29,7 @@ public class Mundial extends javax.swing.JFrame {
         setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
-
+    private HashMap<String, Integer> teamMatches;
     private CAF CAF;
     private OFC OFC;
     private CONMEBOL CONMEBOL;
@@ -803,7 +803,7 @@ public class Mundial extends javax.swing.JFrame {
         this.ActualizarTabla(this.getUEFA().getTablaUEFA(), this.tblUEFA);
 
 
-    }//GEN-LAST:event_btnSimularUEFAActionPerformed
+    }
 
     /**
      * @param evt

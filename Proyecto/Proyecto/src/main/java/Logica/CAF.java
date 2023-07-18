@@ -66,7 +66,14 @@ public class CAF {
             }
         }
     }
-
+    
+    public void simularYActualizarPartido(int team1, int team2) {
+        // Simular el partido y obtener el resultado (puedes usar el código que tenías previamente aquí)
+        
+        // Actualizar las tablas de posiciones con los resultados del partido
+        // (puedes usar el código que tenías previamente aquí para actualizar las tablas de posiciones)
+    }
+      
   public ArrayList<Resultados> getTablaPartido() {
       return tablaPartido;}
 
