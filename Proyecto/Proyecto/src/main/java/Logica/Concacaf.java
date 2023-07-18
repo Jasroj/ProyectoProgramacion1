@@ -17,12 +17,28 @@ public class Concacaf {
 
     public void jugarPartido() {
         Random random = new Random();
-        int equipo1 = random.nextInt(this.getTablaConcacaf().size());
-        int equipo2 = random.nextInt(this.getTablaConcacaf().size());
-        while (equipo1 == equipo2) {
+        boolean partidoNoValido = false;
+        int equipo1 = 0;
+        int equipo2 = 0;
+        do {
+            equipo1 = random.nextInt(this.getTablaConcacaf().size());
             equipo2 = random.nextInt(this.getTablaConcacaf().size());
+            while (equipo1 == equipo2) {
+                equipo2 = random.nextInt(this.getTablaConcacaf().size());
+            }
+            for (Resultados result : this.getTablaPartido()) {
+                if (result.getSelecion1().equals(this.getTablaConcacaf().get(equipo1).getSelecion())
+                        && result.getSelecion2().equals(this.getTablaConcacaf().get(equipo2).getSelecion())) {
+                    partidoNoValido = true;
+                    break;
+                } else {
+                    partidoNoValido = false;
+                }
+            }
+        } while (partidoNoValido);
+        if (!partidoNoValido) {
+            this.resultadoPartido(this.getTablaConcacaf().get(equipo1), this.getTablaConcacaf().get(equipo2));
         }
-        this.resultadoPartido(this.getTablaConcacaf().get(equipo1), this.getTablaConcacaf().get(equipo2));
 
     }
 

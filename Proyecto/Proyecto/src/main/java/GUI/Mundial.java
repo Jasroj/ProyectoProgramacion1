@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import Logica.*;
+import java.util.HashMap;
 import javax.swing.table.TableModel;
 
 /**
@@ -24,7 +25,6 @@ public class Mundial extends javax.swing.JFrame {
     public Mundial() {
         initComponents();
         cargarDatos();
-        ingresarDatos();
         setLocationRelativeTo(null);
         setResizable(false);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -53,6 +53,73 @@ public class Mundial extends javax.swing.JFrame {
         this.CAF = CAF;
     }
 
+     /**
+     * @return the OFC
+     */
+    public OFC getOFC() {
+        if (this.OFC == null) {
+            this.OFC = new OFC();
+        }
+        return OFC;
+    }
+
+    /**
+     * @param OFC the OFC to set
+     */
+    public void setOFC(OFC OFC) {
+        this.OFC = OFC;
+    }
+
+    /**
+     * @return the CONMEBOL
+     */
+    public CONMEBOL getCONMEBOL() {
+        if (this.CONMEBOL == null) {
+            this.CONMEBOL = new CONMEBOL();
+        }
+        return CONMEBOL;
+    }
+
+    /**
+     * @param CONMEBOL the CONMEBOL to set
+     */
+    public void setCONMEBOL(CONMEBOL CONMEBOL) {
+        this.CONMEBOL = CONMEBOL;
+    }
+
+    /**
+     * @return the Concacaf
+     */
+    public Concacaf getConcacaf() {
+        if (this.Concacaf == null) {
+            this.Concacaf = new Concacaf();
+        }
+        return Concacaf;
+    }
+
+    /**
+     * @param Concacaf the Concacaf to set
+     */
+    public void setConcacaf(Concacaf Concacaf) {
+        this.Concacaf = Concacaf;
+    }
+
+    /**
+     * @return the UEFA
+     */
+    public UEFA getUEFA() {
+        if (this.UEFA == null) {
+            this.UEFA = new UEFA();
+        }
+        return UEFA;
+    }
+
+    /**
+     * @param UEFA the UEFA to set
+     */
+    public void setUEFA(UEFA UEFA) {
+        this.UEFA = UEFA;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -567,16 +634,14 @@ public class Mundial extends javax.swing.JFrame {
     }
 
     //this.tblClasificados.setModel(modelo);
-    public void ingresarDatos() {
 
-    }
-    
     private void btnSimularCAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularCAFActionPerformed
         // Obtener el número de filas y columnas del modelo de datos
+
         int filas = tblCAF.getRowCount();
         ArrayList<Selecion> seleciones = new ArrayList<>();
         for (int i = 0; i < filas; i++) {
-            Selecion sele = new Selecion(
+            Selecion caf = new Selecion(
                     (String) tblCAF.getValueAt(i, 0),
                     (int) tblCAF.getValueAt(i, 1),
                     (int) tblCAF.getValueAt(i, 2),
@@ -588,34 +653,40 @@ public class Mundial extends javax.swing.JFrame {
                     (int) tblCAF.getValueAt(i, 8),
                     (int) tblCAF.getValueAt(i, 9)
             );
-            seleciones.add(sele);
+            seleciones.add(caf);
         }
-        this.getCAF().settablaCAF(seleciones);
+        this.getCAF().settablaCaf(seleciones);
         this.getCAF().jugarPartido();
         Resultados res = this.getCAF().getTablaPartido().get(this.getCAF().getTablaPartido().size() - 1);
         this.txtSimuladosCAF.setText(this.Imprimir(res));
-        this.ActualizarTabla(this.getCAF().gettablaCAF(), this.tblCAF);
+//<<<<<<< HEAD
+        this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
         
+//=======
+        this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
+
+
+//>>>>>>> main
     }//GEN-LAST:event_btnSimularCAFActionPerformed
-  
-    private void ActualizarTabla(ArrayList<Selecion> seleciones, JTable table)
-    {
+
+    private void ActualizarTabla(ArrayList<Selecion> seleciones, JTable table) {
         // Crear el modelo de tabla
         DefaultTableModel modelo = new DefaultTableModel();
-    
-        Object [][] Seleciones = new Object [10][10];
+
+        Object[][] Seleciones = new Object[10][10];
         int position = 0;
         for (Selecion sele : seleciones) {
             Object[] fila = {sele.getSelecion(), sele.getPos(), sele.getPuntos(), sele.getPartidosJugados(),
-            sele.getPartidosGanados(), sele.getPartidosEmpatados(), sele.getPartidosPerdidos(),
-            sele.getGolesFavor(), sele.getGolesContra(), sele.getDiferenciaGoles()};
+                sele.getPartidosGanados(), sele.getPartidosEmpatados(), sele.getPartidosPerdidos(),
+                sele.getGolesFavor(), sele.getGolesContra(), sele.getDiferenciaGoles()};
             Seleciones[position] = fila;
             position++;
         }
-        
+
         table.setModel(modelo);
         modelo.setDataVector(Seleciones, new Object[]{"Selección", "Pos", "Pts", "PJ", "PG", "PE", "PP", "GF", "GC", "Dif"});
     }
+
     private String Imprimir(Resultados res) {
         return "El resultado del juego entre " + res.getSelecion1() + " vs " + res.getSelecion2() + " es de " + res.getPos() + " - " + res.getPuntos();
     }
@@ -625,7 +696,7 @@ public class Mundial extends javax.swing.JFrame {
         int filas = tblOFC.getRowCount();
         ArrayList<Selecion> seleciones = new ArrayList<>();
         for (int i = 0; i < filas; i++) {
-            Selecion sele = new Selecion(
+            Selecion ofc = new Selecion(
                     (String) tblOFC.getValueAt(i, 0),
                     (int) tblOFC.getValueAt(i, 1),
                     (int) tblOFC.getValueAt(i, 2),
@@ -637,11 +708,15 @@ public class Mundial extends javax.swing.JFrame {
                     (int) tblOFC.getValueAt(i, 8),
                     (int) tblOFC.getValueAt(i, 9)
             );
-            seleciones.add(sele);
+            seleciones.add(ofc);
         }
-        
+
+        this.getOFC().setTablaOFC(seleciones);
+        this.getOFC().jugarPartido();
         Resultados res = this.getOFC().getTablaPartido().get(this.getOFC().getTablaPartido().size() - 1);
         this.txtSimuladosOFC.setText(this.Imprimir(res));
+        this.ActualizarTabla(this.getOFC().getTablaOFC(), this.tblOFC);
+
     }//GEN-LAST:event_btnSimularOFCActionPerformed
 
     private void btnSimularConcaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularConcaActionPerformed
@@ -649,7 +724,7 @@ public class Mundial extends javax.swing.JFrame {
         int filas = tblConcacaf.getRowCount();
         ArrayList<Selecion> seleciones = new ArrayList<>();
         for (int i = 0; i < filas; i++) {
-            Selecion sele = new Selecion(
+            Selecion conca = new Selecion(
                     (String) tblConcacaf.getValueAt(i, 0),
                     (int) tblConcacaf.getValueAt(i, 1),
                     (int) tblConcacaf.getValueAt(i, 2),
@@ -661,11 +736,14 @@ public class Mundial extends javax.swing.JFrame {
                     (int) tblConcacaf.getValueAt(i, 8),
                     (int) tblConcacaf.getValueAt(i, 9)
             );
-            seleciones.add(sele);
+            seleciones.add(conca);
         }
-        
+
+        this.getConcacaf().setTablaConcacaf(seleciones);
+        this.getConcacaf().jugarPartido();
         Resultados res = this.getConcacaf().getTablaPartido().get(this.getConcacaf().getTablaPartido().size() - 1);
         this.txtSimuladosConca.setText(this.Imprimir(res));
+        this.ActualizarTabla(this.getConcacaf().getTablaConcacaf(), this.tblConcacaf);
 
 
     }//GEN-LAST:event_btnSimularConcaActionPerformed
@@ -675,7 +753,7 @@ public class Mundial extends javax.swing.JFrame {
         int filas = tblCONMEBOL.getRowCount();
         ArrayList<Selecion> seleciones = new ArrayList<>();
         for (int i = 0; i < filas; i++) {
-            Selecion sele = new Selecion(
+            Selecion conme = new Selecion(
                     (String) tblCONMEBOL.getValueAt(i, 0),
                     (int) tblCONMEBOL.getValueAt(i, 1),
                     (int) tblCONMEBOL.getValueAt(i, 2),
@@ -687,20 +765,24 @@ public class Mundial extends javax.swing.JFrame {
                     (int) tblCONMEBOL.getValueAt(i, 8),
                     (int) tblCONMEBOL.getValueAt(i, 9)
             );
-            seleciones.add(sele);
+            seleciones.add(conme);
         }
-        
+
+        this.getCONMEBOL().setTablaCONMEBOL(seleciones);
+        this.getCONMEBOL().jugarPartido();
         Resultados res = this.getCONMEBOL().getTablaPartido().get(this.getCONMEBOL().getTablaPartido().size() - 1);
         this.txtSimuladosConme.setText(this.Imprimir(res));
+        this.ActualizarTabla(this.getCONMEBOL().getTablaCONMEBOL(), this.tblCONMEBOL);
 
     }//GEN-LAST:event_btnSimularConmeActionPerformed
 
     private void btnSimularUEFAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularUEFAActionPerformed
         // Obtener el número de filas y columnas del modelo de datos
+
         int filas = tblUEFA.getRowCount();
         ArrayList<Selecion> seleciones = new ArrayList<>();
         for (int i = 0; i < filas; i++) {
-            Selecion sele = new Selecion(
+            Selecion uefa = new Selecion(
                     (String) tblUEFA.getValueAt(i, 0),
                     (int) tblUEFA.getValueAt(i, 1),
                     (int) tblUEFA.getValueAt(i, 2),
@@ -712,17 +794,47 @@ public class Mundial extends javax.swing.JFrame {
                     (int) tblUEFA.getValueAt(i, 8),
                     (int) tblUEFA.getValueAt(i, 9)
             );
-            seleciones.add(sele);
+            seleciones.add(uefa);
         }
-       
-        Resultados res = this.getUEFA().getTablaPartido().get(this.getUEFA().getTablaPartido().size() - 1);
+        this.getUEFA().setTablaUEFA(seleciones);
+        this.getUEFA().jugarPartido();
+        Resultados res = this.getUEFA().getTablaPartidoUEFA().get(this.getUEFA().getTablaPartidoUEFA().size() - 1);
         this.txtSimuladosUEFA.setText(this.Imprimir(res));
+        this.ActualizarTabla(this.getUEFA().getTablaUEFA(), this.tblUEFA);
+
+
     }//GEN-LAST:event_btnSimularUEFAActionPerformed
 
     private void btnSimularTodoCAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularTodoCAFActionPerformed
+        HashMap<String, Integer> teamMatches = new HashMap<>();
 
+        int rowCount = tblCAF.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            String team1 = (String) tblCAF.getValueAt(i, 0);
+            String team2 = (String) tblCAF.getValueAt(i, 1);
+
+            String teamPair = team1 + "-" + team2;
+            if (teamMatches.containsKey(teamPair)) {
+                int matchesPlayed = teamMatches.get(teamPair);
+                teamMatches.put(teamPair, matchesPlayed + 1);
+            } else {
+                teamMatches.put(teamPair, 1);
+            }
+        }
+
+        for (String teamPair : teamMatches.keySet()) {
+            String[] teams = teamPair.split("-");
+            int matchesToPlay = 2 - teamMatches.get(teamPair);
+            for (int i = 0; i < matchesToPlay; i++) {
+                ///////////////////this.getCAF().resultadoPartido( teams[0], teams[1]);//////////
+            }
+        }
+
+        Resultados res = this.getCAF().getTablaPartido().get(this.getCAF().getTablaPartido().size() - 1);
+        this.txtSimuladosCAF.setText(this.Imprimir(res));
+        this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
         // Obtener el número de filas y columnas del modelo de datos
-        int filas = tblCAF.getRowCount();
+        /* int filas = tblCAF.getRowCount();
         ArrayList<Selecion> seleciones = new ArrayList<>();
 
         for (int i = 0; i < filas; i++) {
@@ -752,7 +864,7 @@ public class Mundial extends javax.swing.JFrame {
         }
 
 // Obtenemos los resultados y actualizamos el campo txtSimuladosCAF
-        Resultados res = this.getCAF().getTablaPartido().get(this.getCAF().getTablaPartido().size() - 1);
+        Resultados res = this.getCAF().getTablaPartido().get(this.getCAF().getTablaPartido().size() - 1);*/
         //this.txtSimuladosCAF.setText(this.Imprimirt());//que opinas?
 
     }//GEN-LAST:event_btnSimularTodoCAFActionPerformed
@@ -828,80 +940,6 @@ public class Mundial extends javax.swing.JFrame {
     private javax.swing.JTextArea txtSimuladosUEFA;
     // End of variables declaration//GEN-END:variables
 
-    private void borrar (){
-        int j = 4;
-    }
-    /**
-     * @return the OFC
-     */
-    public OFC getOFC() {
-        if (this.OFC == null) {
-            this.OFC = new OFC();
-        }
-        return OFC;
-    }
+   
 
-    /**
-     * @param OFC the OFC to set
-     */
-    public void setOFC(OFC OFC) {
-        this.OFC = OFC;
-    }
-
-    /**
-     * @return the CONMEBOL
-     */
-    public CONMEBOL getCONMEBOL() {
-        if (this.CONMEBOL == null) {
-            this.CONMEBOL = new CONMEBOL();
-        }
-        return CONMEBOL;
-    }
-
-    /**
-     * @param CONMEBOL the CONMEBOL to set
-     */
-    public void setCONMEBOL(CONMEBOL CONMEBOL) {
-        this.CONMEBOL = CONMEBOL;
-    }
-
-    /**
-     * @return the Concacaf
-     */
-    public Concacaf getConcacaf() {
-        if (this.Concacaf == null) {
-            this.Concacaf = new Concacaf();
-        }
-        return Concacaf;
-    }
-
-    /**
-     * @param Concacaf the Concacaf to set
-     */
-    public void setConcacaf(Concacaf Concacaf) {
-        this.Concacaf = Concacaf;
-    }
-
-    /**
-     * @return the UEFA
-     */
-    public UEFA getUEFA() {
-        if (this.UEFA == null) {
-            this.UEFA = new UEFA();
-        }
-        return UEFA;
-    }
-
-    /**
-     * @param UEFA the UEFA to set
-     */
-    public void setUEFA(UEFA UEFA) {
-        this.UEFA = UEFA;
-    }
-    public void borrar2 (){
-    int basura;
-    int basura2;
-    int basura3;
-    int basura4;
-}
 }

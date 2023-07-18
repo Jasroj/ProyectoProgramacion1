@@ -14,16 +14,16 @@ import java.util.ArrayList;
  **/
 public class CAF {
     private ArrayList<Resultados> tablaPartido = new ArrayList<>();
-    private ArrayList<Selecion> tablaCAF = new ArrayList<>();
+    private ArrayList<Selecion> tablaCaf = new ArrayList<>();
 
     public void jugarPartido() {
         Random random = new Random();
-        int equipo1 = random.nextInt(this.gettablaCAF().size());
-        int equipo2 = random.nextInt(this.gettablaCAF().size());
+        int equipo1 = random.nextInt(this.gettablaCaf().size());
+        int equipo2 = random.nextInt(this.gettablaCaf().size());
         while (equipo1 == equipo2) {
-            equipo2 = random.nextInt(this.gettablaCAF().size());
+            equipo2 = random.nextInt(this.gettablaCaf().size());
         }
-        this.resultadoPartido(this.gettablaCAF().get(equipo1), this.gettablaCAF().get(equipo2));
+        this.resultadoPartido(this.gettablaCaf().get(equipo1), this.gettablaCaf().get(equipo2));
     }
 
     public void resultadoPartido(Selecion equipo1, Selecion equipo2) {
@@ -41,14 +41,14 @@ public class CAF {
 
     public void simularTodo() {
         for (int i = 0; i < 10; i++) { // Simular 10 partidos para cada equipo
-            for (Selecion equipo : this.gettablaCAF()) {
+            for (Selecion equipo : this.gettablaCaf()) {
                 jugarPartido();
             }
         }
     }
 
     public void ActualizarResultado(Selecion equipo, int golFavor, int golEncontra) {
-        for (Selecion sele : this.gettablaCAF()) {
+        for (Selecion sele : this.gettablaCaf()) {
             if (sele.getSelecion().equals(equipo.getSelecion())) {
                 sele.setPartidosJugados(sele.getPartidosJugados() + 1);
                 sele.setGolesFavor(sele.getGolesFavor() + golFavor);
@@ -75,17 +75,17 @@ public class CAF {
       this.tablaPartido = tablaPartido;}
 
     /**
-     * @return the tablaCAF
+     * @return the tablaCaf
      */
-    public ArrayList<Selecion> gettablaCAF() {
-        return tablaCAF;
+    public ArrayList<Selecion> gettablaCaf() {
+        return tablaCaf;
     }
 
     /**
-     * @param tablaCAF the tablaCAF to set
+     * @param tablaCaf the tablaCaf to set
      */
-    public void settablaCAF(ArrayList<Selecion> tablaCAF) {
-        this.tablaCAF = tablaCAF;
+    public void settablaCaf(ArrayList<Selecion> tablaCaf) {
+        this.tablaCaf = tablaCaf;
     }
 }
 
