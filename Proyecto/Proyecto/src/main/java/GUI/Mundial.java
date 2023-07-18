@@ -819,11 +819,9 @@ public class Mundial extends javax.swing.JFrame {
     
         int rowCount = tblCAF.getRowCount();
         for (int i = 0; i < rowCount; i++) {
-            String team1Str = (String) tblCAF.getValueAt(i, 0);
-            String team2Str = (String) tblCAF.getValueAt(i, 1);
-            int team1 = Integer.parseInt(team1Str);
-            int team2 = Integer.parseInt(team2Str);
-    
+            int team1 = (int) tblCAF.getValueAt(i, 0);
+            int team2 = (int) tblCAF.getValueAt(i, 1);
+
             String teamPair = team1 + "-" + team2;
             if (teamMatches.containsKey(teamPair)) {
                 int matchesPlayed = teamMatches.get(teamPair);
