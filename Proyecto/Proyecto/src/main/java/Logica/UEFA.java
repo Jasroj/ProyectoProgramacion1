@@ -12,29 +12,45 @@ import java.util.Random;
  * @author JRS
  */
 public class UEFA {
-    private ArrayList<Resultados> tablaPartido = new ArrayList<>();
+    private ArrayList<Resultados> tablaPartidoUEFA = new ArrayList<>();
 private ArrayList<Selecion> tablaUEFA = new ArrayList<>();
 
     public void jugarPartido() {
         Random random = new Random();
-        int equipo1 = random.nextInt(this.getTablaUEFA().size());
-        int equipo2 = random.nextInt(this.getTablaUEFA().size());
-        while (equipo1 == equipo2) {
+        boolean partidoNoValido = false;
+        int equipo1 = 0;
+        int equipo2 = 0;
+        do {
+            equipo1 = random.nextInt(this.getTablaUEFA().size());
             equipo2 = random.nextInt(this.getTablaUEFA().size());
+            while (equipo1 == equipo2) {
+                equipo2 = random.nextInt(this.getTablaUEFA().size());
+            }
+            for (Resultados result : this.getTablaPartidoUEFA()) {
+                if (result.getSelecion1().equals(this.getTablaUEFA().get(equipo1).getSelecion())
+                        && result.getSelecion2().equals(this.getTablaUEFA().get(equipo2).getSelecion())) {
+                    partidoNoValido = true;
+                    break;
+                } else {
+                    partidoNoValido = false;
+                }
+            }
+        } while (partidoNoValido);
+        if (!partidoNoValido) {
+            this.resultadoPartido(this.getTablaUEFA().get(equipo1), this.getTablaUEFA().get(equipo2));
         }
-        this.resultadoPartido(this.getTablaUEFA().get(equipo1), this.getTablaUEFA().get(equipo2));
 
     }
 
-    public void resultadoPartido(Selecion equipo1, Selecion equipo2) {
+   public void resultadoPartido(Selecion equipo1, Selecion equipo2) {
         Random random = new Random();
 
         int golE1 = random.nextInt(10);
         int golE2 = random.nextInt(10);
 
         Resultados p = new Resultados(golE1, equipo1.getSelecion(), equipo2.getSelecion(), golE2);
-        this.tablaPartido.add(p);
-        
+        this.tablaPartidoUEFA.add(p);
+
         this.ActualizarResultado(equipo1, golE1, golE2);
         this.ActualizarResultado(equipo2, golE2, golE1);
 
@@ -81,9 +97,8 @@ private ArrayList<Selecion> tablaUEFA = new ArrayList<>();
         }*/
     }
     
-    public void ActualizarResultado(Selecion equipo, int golFavor, int golEncontra)
-    {
-         for (Selecion sele : this.getTablaUEFA()) {
+     public void ActualizarResultado(Selecion equipo, int golFavor, int golEncontra) {
+        for (Selecion sele : this.getTablaUEFA()) {
             if (sele.getSelecion().equals(equipo.getSelecion())) {
                 sele.setPartidosJugados(sele.getPartidosJugados() + 1);
                 sele.setGolesFavor(sele.getGolesFavor() + golFavor);
@@ -92,8 +107,7 @@ private ArrayList<Selecion> tablaUEFA = new ArrayList<>();
                     sele.setPartidosGanados(sele.getPartidosGanados() + 1);
                 } else if (golFavor < golEncontra) {
                     sele.setPartidosPerdidos(sele.getPartidosPerdidos() + 1);
-                }
-                else {
+                } else {
                     sele.setPartidosEmpatados(sele.getPartidosEmpatados() + 1);
                 }
                 sele.setDiferenciaGoles(sele.getGolesFavor() - sele.getGolesContra());
@@ -102,12 +116,12 @@ private ArrayList<Selecion> tablaUEFA = new ArrayList<>();
             }
         }
     }
-  public ArrayList<Resultados> getTablaPartido() {
-      return tablaPartido;}
+  public ArrayList<Resultados> getTablaPartidoUEFA() {
+      return tablaPartidoUEFA;}
 
   
-  public void setTablaPartido(ArrayList<Resultados> tablaPartido) {
-      this.tablaPartido = tablaPartido;}
+  public void setTablaPartidoUEFA(ArrayList<Resultados> tablaPartidoUEFA) {
+      this.tablaPartidoUEFA = tablaPartidoUEFA;}
 
     /**
      * @return the tablaUEFA

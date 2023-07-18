@@ -17,15 +17,30 @@ public class CONMEBOL {
 
     public void jugarPartido() {
         Random random = new Random();
-        int equipo1 = random.nextInt(this.getTablaCONMEBOL().size());
-        int equipo2 = random.nextInt(this.getTablaCONMEBOL().size());
-        while (equipo1 == equipo2) {
+        boolean partidoNoValido = false;
+        int equipo1 = 0;
+        int equipo2 = 0;
+        do {
+            equipo1 = random.nextInt(this.getTablaCONMEBOL().size());
             equipo2 = random.nextInt(this.getTablaCONMEBOL().size());
+            while (equipo1 == equipo2) {
+                equipo2 = random.nextInt(this.getTablaCONMEBOL().size());
+            }
+            for (Resultados result : this.getTablaPartido()) {
+                if (result.getSelecion1().equals(this.getTablaCONMEBOL().get(equipo1).getSelecion())
+                        && result.getSelecion2().equals(this.getTablaCONMEBOL().get(equipo2).getSelecion())) {
+                    partidoNoValido = true;
+                    break;
+                } else {
+                    partidoNoValido = false;
+                }
+            }
+        } while (partidoNoValido);
+        if (!partidoNoValido) {
+            this.resultadoPartido(this.getTablaCONMEBOL().get(equipo1), this.getTablaCONMEBOL().get(equipo2));
         }
-        this.resultadoPartido(this.getTablaCONMEBOL().get(equipo1), this.getTablaCONMEBOL().get(equipo2));
 
     }
-
     public void resultadoPartido(Selecion equipo1, Selecion equipo2) {
         Random random = new Random();
 

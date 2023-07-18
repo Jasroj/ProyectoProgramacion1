@@ -17,12 +17,28 @@ private ArrayList<Selecion> tablaOFC = new ArrayList<>();
 
     public void jugarPartido() {
         Random random = new Random();
-        int equipo1 = random.nextInt(this.getTablaOFC().size());
-        int equipo2 = random.nextInt(this.getTablaOFC().size());
-        while (equipo1 == equipo2) {
+        boolean partidoNoValido = false;
+        int equipo1 = 0;
+        int equipo2 = 0;
+        do {
+            equipo1 = random.nextInt(this.getTablaOFC().size());
             equipo2 = random.nextInt(this.getTablaOFC().size());
+            while (equipo1 == equipo2) {
+                equipo2 = random.nextInt(this.getTablaOFC().size());
+            }
+            for (Resultados result : this.getTablaPartido()) {
+                if (result.getSelecion1().equals(this.getTablaOFC().get(equipo1).getSelecion())
+                        && result.getSelecion2().equals(this.getTablaOFC().get(equipo2).getSelecion())) {
+                    partidoNoValido = true;
+                    break;
+                } else {
+                    partidoNoValido = false;
+                }
+            }
+        } while (partidoNoValido);
+        if (!partidoNoValido) {
+            this.resultadoPartido(this.getTablaOFC().get(equipo1), this.getTablaOFC().get(equipo2));
         }
-        this.resultadoPartido(this.getTablaOFC().get(equipo1), this.getTablaOFC().get(equipo2));
 
     }
 

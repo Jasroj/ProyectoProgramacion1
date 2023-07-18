@@ -18,12 +18,28 @@ public class CAF {
 
     public void jugarPartido() {
         Random random = new Random();
-        int equipo1 = random.nextInt(this.getTablaCaf().size());
-        int equipo2 = random.nextInt(this.getTablaCaf().size());
-        while (equipo1 == equipo2) {
+        boolean partidoNoValido = false;
+        int equipo1 = 0;
+        int equipo2 = 0;
+        do {
+            equipo1 = random.nextInt(this.getTablaCaf().size());
             equipo2 = random.nextInt(this.getTablaCaf().size());
+            while (equipo1 == equipo2) {
+                equipo2 = random.nextInt(this.getTablaCaf().size());
+            }
+            for (Resultados result : this.getTablaPartido()) {
+                if (result.getSelecion1().equals(this.getTablaCaf().get(equipo1).getSelecion())
+                        && result.getSelecion2().equals(this.getTablaCaf().get(equipo2).getSelecion())) {
+                    partidoNoValido = true;
+                    break;
+                } else {
+                    partidoNoValido = false;
+                }
+            }
+        } while (partidoNoValido);
+        if (!partidoNoValido) {
+            this.resultadoPartido(this.getTablaCaf().get(equipo1), this.getTablaCaf().get(equipo2));
         }
-        this.resultadoPartido(this.getTablaCaf().get(equipo1), this.getTablaCaf().get(equipo2));
 
     }
 
@@ -35,12 +51,12 @@ public class CAF {
 
         Resultados p = new Resultados(golE1, equipo1.getSelecion(), equipo2.getSelecion(), golE2);
         this.tablaPartido.add(p);
-        
+
         this.ActualizarResultado(equipo1, golE1, golE2);
         this.ActualizarResultado(equipo2, golE2, golE1);
 
 //te parece si comentas lo que intentaste para ver intentar la idea que llevaba ayer? es que ya se me hizo enredo :D jjjj si si sorry jejejeje
-       /* for (int i = 0; i > seleciones.size(); i++) {
+        /* for (int i = 0; i > seleciones.size(); i++) {
             if (equipo1.equals(seleciones.get(i).getSelecion())) {
                 seleciones.get(i).setGolesFavor(p.getPos());//pos son goles del equipo 1
                 seleciones.get(i).setGolesContra(p.getPuntos());//puntos son goles del equipo 2
@@ -81,10 +97,9 @@ public class CAF {
             }
         }*/
     }
-    
-    public void ActualizarResultado(Selecion equipo, int golFavor, int golEncontra)
-    {
-         for (Selecion sele : this.getTablaCaf()) {
+
+    public void ActualizarResultado(Selecion equipo, int golFavor, int golEncontra) {
+        for (Selecion sele : this.getTablaCaf()) {
             if (sele.getSelecion().equals(equipo.getSelecion())) {
                 sele.setPartidosJugados(sele.getPartidosJugados() + 1);
                 sele.setGolesFavor(sele.getGolesFavor() + golFavor);
@@ -93,8 +108,7 @@ public class CAF {
                     sele.setPartidosGanados(sele.getPartidosGanados() + 1);
                 } else if (golFavor < golEncontra) {
                     sele.setPartidosPerdidos(sele.getPartidosPerdidos() + 1);
-                }
-                else {
+                } else {
                     sele.setPartidosEmpatados(sele.getPartidosEmpatados() + 1);
                 }
                 sele.setDiferenciaGoles(sele.getGolesFavor() - sele.getGolesContra());
@@ -103,12 +117,14 @@ public class CAF {
             }
         }
     }
-  public ArrayList<Resultados> getTablaPartido() {
-      return tablaPartido;}
 
-  
-  public void setTablaPartido(ArrayList<Resultados> tablaPartido) {
-      this.tablaPartido = tablaPartido;}
+    public ArrayList<Resultados> getTablaPartido() {
+        return tablaPartido;
+    }
+
+    public void setTablaPartido(ArrayList<Resultados> tablaPartido) {
+        this.tablaPartido = tablaPartido;
+    }
 
     /**
      * @return the tablaCaf
@@ -124,8 +140,3 @@ public class CAF {
         this.tablaCaf = tablaCaf;
     }
 }
-
-
-
-
-
