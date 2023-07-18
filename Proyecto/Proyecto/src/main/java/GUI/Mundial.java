@@ -815,30 +815,42 @@ public class Mundial extends javax.swing.JFrame {
      * @param evt
      */
     private void btnSimularTodoCAFActionPerformed(java.awt.event.ActionEvent evt) {
+        HashMap<String, Integer> teamMatches = new HashMap<>();
+    
+        int rowCount = tblCAF.getRowCount();
+        for (int i = 0; i < rowCount; i++) {
+            String team1Str = (String) tblCAF.getValueAt(i, 0);
+            String team2Str = (String) tblCAF.getValueAt(i, 1);
+            int team1 = Integer.parseInt(team1Str);
+            int team2 = Integer.parseInt(team2Str);
+    
+            String teamPair = team1 + "-" + team2;
+            if (teamMatches.containsKey(teamPair)) {
+                int matchesPlayed = teamMatches.get(teamPair);
+                teamMatches.put(teamPair, matchesPlayed + 1);
+            } else {
+                teamMatches.put(teamPair, 1);
+            }
+        }
+    
         for (String teamPair : teamMatches.keySet()) {
             String[] teams = teamPair.split("-");
             int matchesToPlay = 2 - teamMatches.get(teamPair);
             for (int i = 0; i < matchesToPlay; i++) {
-                // Simular y actualizar los resultados del partido
                 int team1 = Integer.parseInt(teams[0]);
                 int team2 = Integer.parseInt(teams[1]);
                 this.getCAF().simularYActualizarPartido(team1, team2);
             }
         }
     
-
-        for (String teamPair : teamMatches.keySet()) {
-            String[] teams = teamPair.split("-");
-            int matchesToPlay = 2 - teamMatches.get(teamPair);
-            for (int i = 0; i < matchesToPlay; i++) {
-                ///////////////////this.getCAF().resultadoPartido( teams[0], teams[1]);//////////
-            }
+        // Actualizar la interfaz gráfica con los resultados obtenidos.
+        List<Resultados> tablaPartido = this.getCAF().getTablaPartido();
+        if (!tablaPartido.isEmpty()) {
+            Resultados res = tablaPartido.get(tablaPartido.size() - 1);
+            this.txtSimuladosCAF.setText(this.Imprimir(res));
+            this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
         }
-
-        Resultados res = this.getCAF().getTablaPartido().get(this.getCAF().getTablaPartido().size() - 1);
-        this.txtSimuladosCAF.setText(this.Imprimir(res));
-        this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
-    }
+    
 
     /**
      * @param args the command line arguments
