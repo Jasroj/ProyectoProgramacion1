@@ -10,21 +10,20 @@ import java.util.ArrayList;
 /**
  *
  * @author JRS
- */
+ * 
+ **/
 public class CAF {
-
     private ArrayList<Resultados> tablaPartido = new ArrayList<>();
-    private ArrayList<Selecion> tablaCaf = new ArrayList<>();
+    private ArrayList<Selecion> tablaCAF = new ArrayList<>();
 
     public void jugarPartido() {
         Random random = new Random();
-        int equipo1 = random.nextInt(this.getTablaCaf().size());
-        int equipo2 = random.nextInt(this.getTablaCaf().size());
+        int equipo1 = random.nextInt(this.gettablaCAF().size());
+        int equipo2 = random.nextInt(this.gettablaCAF().size());
         while (equipo1 == equipo2) {
-            equipo2 = random.nextInt(this.getTablaCaf().size());
+            equipo2 = random.nextInt(this.gettablaCAF().size());
         }
-        this.resultadoPartido(this.getTablaCaf().get(equipo1), this.getTablaCaf().get(equipo2));
-
+        this.resultadoPartido(this.gettablaCAF().get(equipo1), this.gettablaCAF().get(equipo2));
     }
 
     public void resultadoPartido(Selecion equipo1, Selecion equipo2) {
@@ -35,14 +34,21 @@ public class CAF {
 
         Resultados p = new Resultados(golE1, equipo1.getSelecion(), equipo2.getSelecion(), golE2);
         this.tablaPartido.add(p);
-        
+
         this.ActualizarResultado(equipo1, golE1, golE2);
         this.ActualizarResultado(equipo2, golE2, golE1);
     }
-    
-    public void ActualizarResultado(Selecion equipo, int golFavor, int golEncontra)
-    {
-         for (Selecion sele : this.getTablaCaf()) {
+
+    public void simularTodo() {
+        for (int i = 0; i < 10; i++) { // Simular 10 partidos para cada equipo
+            for (Selecion equipo : this.gettablaCAF()) {
+                jugarPartido();
+            }
+        }
+    }
+
+    public void ActualizarResultado(Selecion equipo, int golFavor, int golEncontra) {
+        for (Selecion sele : this.gettablaCAF()) {
             if (sele.getSelecion().equals(equipo.getSelecion())) {
                 sele.setPartidosJugados(sele.getPartidosJugados() + 1);
                 sele.setGolesFavor(sele.getGolesFavor() + golFavor);
@@ -51,8 +57,7 @@ public class CAF {
                     sele.setPartidosGanados(sele.getPartidosGanados() + 1);
                 } else if (golFavor < golEncontra) {
                     sele.setPartidosPerdidos(sele.getPartidosPerdidos() + 1);
-                }
-                else {
+                } else {
                     sele.setPartidosEmpatados(sele.getPartidosEmpatados() + 1);
                 }
                 sele.setDiferenciaGoles(sele.getGolesFavor() - sele.getGolesContra());
@@ -61,6 +66,7 @@ public class CAF {
             }
         }
     }
+
   public ArrayList<Resultados> getTablaPartido() {
       return tablaPartido;}
 
@@ -69,17 +75,17 @@ public class CAF {
       this.tablaPartido = tablaPartido;}
 
     /**
-     * @return the tablaCaf
+     * @return the tablaCAF
      */
-    public ArrayList<Selecion> getTablaCaf() {
-        return tablaCaf;
+    public ArrayList<Selecion> gettablaCAF() {
+        return tablaCAF;
     }
 
     /**
-     * @param tablaCaf the tablaCaf to set
+     * @param tablaCAF the tablaCAF to set
      */
-    public void setTablaCaf(ArrayList<Selecion> tablaCaf) {
-        this.tablaCaf = tablaCaf;
+    public void settablaCAF(ArrayList<Selecion> tablaCAF) {
+        this.tablaCAF = tablaCAF;
     }
 }
 
