@@ -835,59 +835,7 @@ public class Mundial extends javax.swing.JFrame {
         Resultados res = this.getCAF().getTablaPartido().get(this.getCAF().getTablaPartido().size() - 1);
         this.txtSimuladosCAF.setText(this.Imprimir(res));
         this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
-        // Obtener el número de filas y columnas del modelo de datos
-        /* int filas = tblCAF.getRowCount();
-        ArrayList<Selecion> seleciones = new ArrayList<>();
 
-        for (int i = 0; i < filas; i++) {
-            Selecion sele = new Selecion(
-                    (String) tblCAF.getValueAt(i, 0),
-                    (int) tblCAF.getValueAt(i, 1),
-                    (int) tblCAF.getValueAt(i, 2),
-                    (int) tblCAF.getValueAt(i, 3),
-                    (int) tblCAF.getValueAt(i, 4),
-                    (int) tblCAF.getValueAt(i, 5),
-                    (int) tblCAF.getValueAt(i, 6),
-                    (int) tblCAF.getValueAt(i, 7),
-                    (int) tblCAF.getValueAt(i, 8),
-                    (int) tblCAF.getValueAt(i, 9)
-            );
-            seleciones.add(sele);
-        }
-
-// Simular todos los partidos
-        for (int i = 0; i < seleciones.size(); i++) {
-            for (int j = i + 1; j < seleciones.size(); j++) {
-                Selecion local = seleciones.get(i);
-                Selecion visitante = seleciones.get(j);
-
-                //this.getCAF().jugarPartido(local, visitante);
-            }
-        }
-
-// Obtenemos los resultados y actualizamos el campo txtSimuladosCAF
-        Resultados res = this.getCAF().getTablaPartido().get(this.getCAF().getTablaPartido().size() - 1);*/
-        //this.txtSimuladosCAF.setText(this.Imprimirt());//que opinas?
-
-    }//GEN-LAST:event_btnSimularTodoCAFActionPerformed
-// Modificar el método Imprimir para mostrar todos los resultados
-/*private String Imprimirt(ArrayList<Resultados> resultados) {
-    StringBuilder sb = new StringBuilder();
-// Este de aca seria para mostrar en la tabla de puntos? no, seria para imprimir todos los goles digamos en el boton simulartodos
-    for (Resultados res : resultados) {
-        sb.append("El resultado del juego entre ")
-          .append(res.getSelecion1())
-          .append(" vs ")
-          .append(res.getSelecion2())
-          .append(" es de ")
-          .append(res.getPos())
-          .append(" - ")
-          .append(res.getPuntos())
-          .append("\n");
-    }
-
-    return sb.toString();
-}*/
     /**
      * @param args the command line arguments
      */
