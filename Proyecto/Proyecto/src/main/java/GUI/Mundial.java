@@ -805,24 +805,21 @@ public class Mundial extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnSimularUEFAActionPerformed
 
-    private void btnSimularTodoCAFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularTodoCAFActionPerformed
-        HashMap<String, Integer> teamMatches = new HashMap<>();
-
-        int rowCount = tblCAF.getRowCount();
-        for (int i = 0; i < rowCount; i++) {
-            int team1Int = (int) tblCAF.getValueAt(i, 0);
-            int team2Int = (int) tblCAF.getValueAt(i, 1);
-            String team1 = Integer.toString(team1Int);
-            String team2 = Integer.toString(team2Int);
-
-            String teamPair = team1 + "-" + team2;
-            if (teamMatches.containsKey(teamPair)) {
-                int matchesPlayed = teamMatches.get(teamPair);
-                teamMatches.put(teamPair, matchesPlayed + 1);
-            } else {
-                teamMatches.put(teamPair, 1);
+    /**
+     * @param evt
+     */
+    private void btnSimularTodoCAFActionPerformed(java.awt.event.ActionEvent evt) {
+        for (String teamPair : teamMatches.keySet()) {
+            String[] teams = teamPair.split("-");
+            int matchesToPlay = 2 - teamMatches.get(teamPair);
+            for (int i = 0; i < matchesToPlay; i++) {
+                // Simular y actualizar los resultados del partido
+                int team1 = Integer.parseInt(teams[0]);
+                int team2 = Integer.parseInt(teams[1]);
+                this.getCAF().simularYActualizarPartido(team1, team2); 
             }
         }
+    
 
         for (String teamPair : teamMatches.keySet()) {
             String[] teams = teamPair.split("-");
@@ -835,6 +832,7 @@ public class Mundial extends javax.swing.JFrame {
         Resultados res = this.getCAF().getTablaPartido().get(this.getCAF().getTablaPartido().size() - 1);
         this.txtSimuladosCAF.setText(this.Imprimir(res));
         this.ActualizarTabla(this.getCAF().gettablaCaf(), this.tblCAF);
+    }
 
     /**
      * @param args the command line arguments
